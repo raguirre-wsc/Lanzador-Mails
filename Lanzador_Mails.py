@@ -1,6 +1,6 @@
 import win32com.client as win32
 import pandas
-
+import arrow
 
 def mailContrapartes():
     #Cramos una instancia de Outlook
@@ -21,8 +21,8 @@ def mailContrapartes():
     #Lo levantamos con Pandas y creamos un dataframe
     pd=pandas.read_excel(dir_op, sheet_name="Nueva hoja soporte")
 
-    #Queremos ver las contrapartes (alycs) operadas ese dia. Tomamos el campo "CONTRAPARTE" y convertimos a set para quedarnos con valores unicos
-    contra=set(pd['CONTRAPARTE'].unique())
+    #Queremos ver las contrapartes (alycs) operadas ese dia. Tomamos los valores unicos del campo "CONTRAPARTE" y convertimos a lista
+    contra=list(pd['CONTRAPARTE'].unique())
 
     #Generamos un loop para crear un mail por cada contraparte
     for i in contra:
@@ -58,7 +58,7 @@ def escritura():
     pd["MONTO"]=pd["MONTO"].astype('float').round(2)
     pd["OBSERVACIÓN"].fillna("-", inplace=True)
     #Obtenemos una lista con las contrapartes
-    contra=set(pd['CONTRAPARTE'].unique())
+    contra=list(pd['CONTRAPARTE'].unique())
     #Generamos un html por cada una de ellas
     for i in contra:
         #Filtramos las operaciones aisladas de esa contraparte en un nuevo df
