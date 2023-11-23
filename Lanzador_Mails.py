@@ -2,6 +2,12 @@ import win32com.client as win32
 import pandas
 import arrow
 
+#Esta funcion se encargara de generar mails, para informar las operaciones de Fondos Comunes de Inversion
+#que deben cursarse en el dia, a las distintas sociedades de bolsa con las que trabaja la organizacion.
+#Para ello se partira de una planilla de Excel creada por el usuario donde ira detallando las mismas.
+#Este caso reuslta ideal para sistematizar, dado que un error de tipeo en el mail puede desembocar en que la operacion
+#se curse de forma incorrecta generando un costo financiero innecesario para el empresa.
+
 def mailContrapartes():
     #Cramos una instancia de Outlook
     olApp = win32.Dispatch("Outlook.Application")
